@@ -195,7 +195,12 @@ class LoanScreen extends StatelessWidget {
                                     }
                                   },
                                   child: scrollTab(
-                                    boxColor: _controller.activeTab.value == 1 ? const Color(0xff4c1a72) : Color.alphaBlend(Colors.black.withOpacity(0.3), const Color(0xff4c1a72)),
+                                    boxColor: _controller.activeTab.value == 1
+                                        ? const Color(0xff4c1a72)
+                                        : Color.alphaBlend(
+                                            Colors.black.withOpacity(0.3),
+                                            const Color(0xff4c1a72),
+                                          ),
                                     isActive: _controller.activeTab.value == 1,
                                     height: 560,
                                     width: MediaQuery.sizeOf(context).width,
@@ -249,7 +254,7 @@ class LoanScreen extends StatelessWidget {
                                               height: 40,
                                               width: MediaQuery.sizeOf(context).width / 3,
                                               child: Text(
-                                                "Rs4,500 /mo",
+                                                _controller.loanData.items![1].openState!.body!.items![_controller.planSelected.value].emi!,
                                                 style: TextStyle(
                                                   color: Colors.white38,
                                                   fontSize: 18,
@@ -277,7 +282,7 @@ class LoanScreen extends StatelessWidget {
                                               height: 40,
                                               width: MediaQuery.sizeOf(context).width / 3,
                                               child: Text(
-                                                "12 months",
+                                                _controller.loanData.items![1].openState!.body!.items![_controller.planSelected.value].duration!,
                                                 style: TextStyle(
                                                   color: Colors.white38,
                                                   fontSize: 18,
@@ -302,65 +307,80 @@ class LoanScreen extends StatelessWidget {
                                               itemBuilder: (context, index) {
                                                 return Padding(
                                                   padding: const EdgeInsets.fromLTRB(0, 20, 15, 20),
-                                                  child: Container(
-                                                    height: 200,
-                                                    width: 200,
-                                                    decoration: BoxDecoration(
-                                                      color: Color(0xff5a5156),
-                                                      borderRadius: BorderRadius.circular(30),
-                                                    ),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.all(20),
-                                                      child: Column(
-                                                        mainAxisAlignment: MainAxisAlignment.center,
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Spacer(),
-                                                          Row(
-                                                            children: [
-                                                              Container(
-                                                                height: 40,
-                                                                width: 40,
-                                                                decoration: BoxDecoration(
-                                                                  shape: BoxShape.circle,
-                                                                  border: Border.all(
-                                                                    color: Colors.white70,
-                                                                    width: 2,
+                                                  child: GestureDetector(
+                                                    onTap: (){
+                                                      _controller.planSelected.value = index;
+                                                      print(_controller.planSelected.value);
+                                                    },
+                                                    child: Container(
+                                                      height: 200,
+                                                      width: 200,
+                                                      decoration: BoxDecoration(
+                                                        color: Color(0xff5a5156),
+                                                        borderRadius: BorderRadius.circular(30),
+                                                      ),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(20),
+                                                        child: Column(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Spacer(),
+                                                            Row(
+                                                              children: [
+                                                                Container(
+                                                                  height: 40,
+                                                                  width: 40,
+                                                                  decoration: BoxDecoration(
+                                                                    shape: BoxShape.circle,
+                                                                    border: Border.all(
+                                                                      color: Colors.white70,
+                                                                      width: 2,
+                                                                    ),
                                                                   ),
+                                                                  child: Obx((){
+                                                                    return _controller.planSelected.value == index ? Center(
+                                                                      child: Icon(
+                                                                        Icons.check_circle_rounded,
+                                                                        size: 35,
+                                                                        color: Colors.white54,
+                                                                      ),
+                                                                    ) : SizedBox();
+                                                                  }),
                                                                 ),
-                                                              ),
-                                                              Spacer(
-                                                                flex: 1,
-                                                              ),
-                                                              Text(
-                                                                _controller.loanData.items![1].openState!.body!.items![index].tag ?? "",
-                                                                style: TextStyle(color: Colors.white70),
-                                                              ),
-                                                              Spacer(
-                                                                flex: 1,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Spacer(),
-                                                          Text(
-                                                            _controller.loanData.items![1].openState!.body!.items![index].title!,
-                                                            style: TextStyle(
-                                                              fontSize: 20,
-                                                              color: Colors.white,
-                                                              fontWeight: FontWeight.w600,
+                                                                Spacer(
+                                                                  flex: 1,
+                                                                ),
+                                                                Text(
+                                                                  _controller.loanData.items![1].openState!.body!.items![index].tag ?? "",
+                                                                  style: TextStyle(color: Colors.white70),
+                                                                ),
+                                                                Spacer(
+                                                                  flex: 1,
+                                                                ),
+                                                              ],
                                                             ),
-                                                          ),
-                                                          Spacer(),
-                                                          Text(
-                                                            _controller.loanData.items![1].openState!.body!.items![index].subtitle!,
-                                                            style: TextStyle(
-                                                              fontSize: 18,
-                                                              color: Colors.white54,
-                                                              fontWeight: FontWeight.w600,
+                                                            Spacer(),
+                                                            Text(
+                                                              _controller.loanData.items![1].openState!.body!.items![index].title!,
+                                                              style: TextStyle(
+                                                                fontSize: 20,
+                                                                color: Colors.white,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Spacer(),
-                                                        ],
+                                                            Spacer(),
+                                                            Text(
+                                                              _controller.loanData.items![1].openState!.body!.items![index].subtitle!,
+                                                              style: TextStyle(
+                                                                fontSize: 18,
+                                                                color: Colors.white54,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
+                                                            ),
+                                                            Spacer(),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
                                                   ),

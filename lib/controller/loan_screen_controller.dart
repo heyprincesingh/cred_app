@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class LoanScreenController extends GetxController {
   var activeTab = 0.obs;
   String loanAmount = "";
-  int planSelected = 0;
+  RxInt planSelected = 0.obs;
   RxBool isDataLoaded = false.obs;
   late LoanDataModel loanData;
 
