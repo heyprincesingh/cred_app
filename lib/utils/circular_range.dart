@@ -8,7 +8,7 @@ class CircularRangeSlider extends StatefulWidget {
   final double maxRange;
   final double minRange;
   final double initialValue;
-  final ValueChanged<double>? onChange; // Added onChange callback
+  final ValueChanged<double>? onChange;
 
   const CircularRangeSlider({
     Key? key,
@@ -17,7 +17,7 @@ class CircularRangeSlider extends StatefulWidget {
     required this.maxRange,
     required this.minRange,
     required this.initialValue,
-    this.onChange, // Add onChange as a parameter
+    this.onChange,
   }) : super(key: key);
 
   @override
@@ -62,17 +62,14 @@ class _CircularRangeSliderState extends State<CircularRangeSlider> {
           if (distance <= radius) {
             double newAngle = atan2(dy, dx);
 
-            // Ensure that the new value is within bounds
             double newValue = _angleToValue(newAngle).clamp(widget.minRange, widget.maxRange);
 
             setState(() {
-              // Only update the angle and value if the value is within bounds
               _dragAngle = newAngle;
               _currentValue = newValue;
 
-              // Call onChange callback if it's provided
               if (widget.onChange != null) {
-                widget.onChange!(_currentValue); // Trigger the callback with the new value
+                widget.onChange!(_currentValue);
               }
             });
           }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import '../model/loan_data_model.dart';
 
 String apiUrl = "https://api.mocklets.com/p6764/test_mint";

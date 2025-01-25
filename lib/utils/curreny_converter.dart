@@ -23,7 +23,7 @@ String convertCurrencyIntoString(String currency) {
 
   String formattedRemaining = formatted.toString().split('').reversed.join();
 
-  return '₹ ' + formattedRemaining + ',' + lastThree;
+  return '₹ $formattedRemaining,$lastThree';
 }
 
 class StringBuilder {

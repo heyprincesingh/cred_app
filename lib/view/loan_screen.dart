@@ -310,7 +310,6 @@ class LoanScreen extends StatelessWidget {
                                                   child: GestureDetector(
                                                     onTap: (){
                                                       _controller.planSelected.value = index;
-                                                      print(_controller.planSelected.value);
                                                     },
                                                     child: Container(
                                                       height: 200,
