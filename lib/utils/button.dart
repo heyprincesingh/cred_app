@@ -9,7 +9,8 @@ Container exploreButton(double width, String title) {
         BoxShadow(
           color: Colors.white24,
           blurRadius: 10.0,
-          offset: Offset(-5, -5),
+          spreadRadius: -3,
+          offset: Offset(-6, -6),
         ),
       ],
       borderRadius: BorderRadius.circular(40.0),
